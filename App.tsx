@@ -42,24 +42,70 @@ export default function App() {
   }
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.safeArea}>
       <StatusBar />
-      <View>
-        <Text>Busca por CEP</Text>
-        <TextInput placeholder='Digite um CEP' />
-        <Pressable>
-          <Text>Consultar</Text>
+      <View style={styles.container}>
+        <Text style={styles.titulo}>Busca por CEP</Text>
+        <TextInput placeholder='Digite um CEP'
+          value={cep}
+          onChangeText={(value) => setCep(value)}
+          style={styles.input} />
+        <Pressable onPress={buscarCep} style={styles.botao}>
+          <Text style={styles.textoBotao}>Consultar</Text>
         </Pressable>
+
+        {!!cidade && <Text style={styles.resultado}>Cidade: {cidade}</Text>}
+        {!!erro && <Text style={styles.erro}>{erro}</Text>}
       </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1
+  },
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    padding: 24
   },
+  titulo: {
+    fontSize: 24,
+    fontWeight: '700',
+    marginBottom: 16,
+    textAlign: 'center'
+  },
+  input: {
+    backgroundColor: '#ffffff',
+    borderColor: '#d0d0d0',
+    borderRadius: 8,
+    borderWidth: 1,
+    fontSize: 18,
+    marginBottom: 12
+  },
+  botao: {
+    alignItems: 'center',
+    backgroundColor: '#d0d0d0',
+    borderRadius: 8,
+    padding: 14
+  },
+  textoBotao: {
+    color: "#000000",
+    fontSize: 16,
+    fontWeight: '700'
+  },
+  resultado: {
+    fontSize: 20,
+    fontWeight: '600',
+    marginTop: 20,
+    textAlign: 'center'
+  },
+  erro: {
+    color: '#b91c1c',
+    fontSize: 16,
+    marginTop: 20,
+    textAlign: 'center'
+  }
 });
